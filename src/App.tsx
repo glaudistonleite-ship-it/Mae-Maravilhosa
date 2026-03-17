@@ -111,15 +111,16 @@ export default function App() {
 
   const handleCreateCaricature = async () => {
     if (!selectedImage) return;
+
     setIsGeneratingCaricature(true);
     try {
       const base64Data = selectedImage.split(',')[1];
       const mimeType = selectedImage.split(';')[0].split(':')[1];
       const result = await generateCaricature(base64Data, mimeType);
       setCaricatureResult(result);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("Erro ao gerar caricatura. Tente novamente.");
+      alert("Erro ao gerar caricatura: " + (error.message || "Tente novamente."));
     } finally {
       setIsGeneratingCaricature(false);
     }
