@@ -4,16 +4,19 @@ import { Heart, Send, Sparkles, Image as ImageIcon, Loader2, Download, RefreshCw
 import { generateMessage, generateCaricature } from './services/gemini';
 
 
-type Category = 'curtas' | 'emocionantes' | 'religiosas' | 'engracadas' | 'status' | 'motivacionais' | 'especiais';
+type Category = 'curtas' | 'emocionantes' | 'religiosas' | 'engracadas' | 'status' | 'motivacionais' | 'poeticas' | 'agradecimento' | 'primeira_vez' | 'especiais';
 
 const CATEGORIES: { id: Category; label: string; icon: string; prompt: string }[] = [
-  { id: 'curtas', label: 'Mensagens Curtas', icon: '💖', prompt: 'Crie uma mensagem curtíssima de Dia das Mães (máximo 10 palavras).' },
+  { id: 'curtas', label: 'Curtas', icon: '💖', prompt: 'Crie uma mensagem curtíssima de Dia das Mães (máximo 10 palavras).' },
   { id: 'emocionantes', label: 'Emocionantes', icon: '😢', prompt: 'Crie uma mensagem de Dia das Mães PROFUNDAMENTE EMOCIONANTE, longa e tocante, capaz de fazer chorar de emoção. Use palavras que toquem a alma, fale sobre sacrifício, amor incondicional e a importância vital de uma mãe. A mensagem deve ser extensa e poética.' },
+  { id: 'poeticas', label: 'Poéticas', icon: '📜', prompt: 'Crie uma mensagem poética e lírica de Dia das Mães, como um pequeno poema ou versos rimados.' },
+  { id: 'agradecimento', label: 'Gratidão', icon: '🙌', prompt: 'Crie uma mensagem de Dia das Mães focada em gratidão infinita por tudo o que ela fez e faz.' },
   { id: 'religiosas', label: 'Religiosas', icon: '🙏', prompt: 'Crie uma mensagem religiosa de Dia das Mães com bênçãos e fé.' },
   { id: 'engracadas', label: 'Engraçadas', icon: '😂', prompt: 'Crie uma mensagem engraçada e divertida de Dia das Mães.' },
-  { id: 'status', label: 'Status para WhatsApp', icon: '📱', prompt: 'Crie uma frase curta e impactante de Dia das Mães ideal para status de WhatsApp.' },
-  { id: 'motivacionais', label: 'Motivacionais', icon: '✨', prompt: 'Crie uma mensagem de Dia das Mães motivadora e inspiradora. Fale sobre a força da mulher, a resiliência de ser mãe e como ela é um exemplo de superação e luz para seus filhos.' },
-  { id: 'especiais', label: 'Mensagens Especiais 💌', icon: '💎', prompt: 'Crie uma mensagem de Dia das Mães EXTRAORDINÁRIA, LUXUOSA e EXTREMAMENTE TOCANTE. Deve ser uma obra-prima em forma de texto, longa, com metáforas lindas e um sentimento de gratidão infinita que leve às lágrimas.' },
+  { id: 'status', label: 'Status', icon: '📱', prompt: 'Crie uma frase curta e impactante de Dia das Mães ideal para status de WhatsApp.' },
+  { id: 'motivacionais', label: 'Inspiradoras', icon: '✨', prompt: 'Crie uma mensagem de Dia das Mães motivadora e inspiradora. Fale sobre a força da mulher, a resiliência de ser mãe e como ela é um exemplo de superação e luz para seus filhos.' },
+  { id: 'primeira_vez', label: '1ª Viagem', icon: '👶', prompt: 'Crie uma mensagem especial para uma mãe de primeira viagem, celebrando seu primeiro Dia das Mães.' },
+  { id: 'especiais', label: 'Exclusivas 💌', icon: '💎', prompt: 'Crie uma mensagem de Dia das Mães EXTRAORDINÁRIA, LUXUOSA e EXTREMAMENTE TOCANTE. Deve ser uma obra-prima em forma de texto, longa, com metáforas lindas e um sentimento de gratidão infinita que leve às lágrimas.' },
 ];
 
 export default function App() {
@@ -164,13 +167,66 @@ export default function App() {
     setCustomMessage('');
     
     const fallbacks: Record<string, string[]> = {
-      curtas: ["Mãe, você é meu tudo! Feliz Dia das Mães!", "Te amo, mãe! Obrigado por tudo."],
-      emocionantes: ["Mãe, seu amor é a luz que guia meus passos. Não sei o que seria de mim sem você.", "Obrigado por cada sacrifício, por cada lágrima e por cada sorriso. Te amo infinitamente."],
-      religiosas: ["Que Deus abençoe sua vida hoje e sempre, mãe. Você é um presente divino.", "Mãe, você é a maior bênção que Deus colocou no meu caminho."],
-      engracadas: ["Mãe, eu te amo mais do que você ama dizer 'na volta a gente compra'.", "Feliz Dia das Mães para aquela que sempre acha o que eu perco em 2 segundos."],
-      status: ["Mãe: meu primeiro amor, minha eterna rainha. 👑❤️", "A vida não vem com manual, vem com uma mãe. Feliz Dia das Mães! 🌸"],
-      especiais: ["Mãe, você é a poesia mais linda que Deus escreveu em minha vida. Seu amor é um oceano de bondade, onde encontro paz e força para enfrentar qualquer tempestade. Obrigado por ser minha rocha, meu porto seguro e minha maior inspiração. Feliz Dia das Mães!", "Neste dia tão especial, quero que saiba que cada batida do meu coração é um agradecimento por tudo o que você é. Sua dedicação, seu carinho e sua sabedoria moldaram quem eu sou hoje. Você é a rainha do meu lar e a heroína da minha história. Te amo além das palavras!"],
-      motivacionais: ["Mãe, sua força é o que me ensina a nunca desistir. Você é o maior exemplo de resiliência que conheço.", "Sua luz brilha em cada passo que dou. Obrigado por ser essa mulher incrível e inspiradora."]
+      curtas: [
+        "Mãe, você é meu tudo! Feliz Dia das Mães!", 
+        "Te amo, mãe! Obrigado por tudo.",
+        "A melhor mãe do mundo é a minha!",
+        "Amor de mãe é o maior do universo."
+      ],
+      emocionantes: [
+        "Mãe, seu amor é a luz que guia meus passos. Não sei o que seria de mim sem você.", 
+        "Obrigado por cada sacrifício, por cada lágrima e por cada sorriso. Te amo infinitamente.",
+        "Seu colo é meu porto seguro, sua voz é minha calmaria. Você é minha heroína.",
+        "Mãe, você me ensinou o que é amor verdadeiro apenas existindo."
+      ],
+      poeticas: [
+        "Mãe, flor que perfuma meu caminho, estrela que brilha em meu destino.",
+        "Teu amor é um verso sem fim, a melodia mais doce em mim.",
+        "Como o sol que aquece a manhã, teu carinho é minha proteção vã.",
+        "Em cada gesto teu, encontro um pedaço do céu."
+      ],
+      agradecimento: [
+        "Obrigado por me ensinar a voar e por ser meu ninho sempre que precisei voltar.",
+        "Minha gratidão por você não cabe em palavras, só no meu abraço apertado.",
+        "Pelas noites em claro e pelos dias de luz, obrigado por tudo, mãe.",
+        "Você me deu a vida e me ensinou a vivê-la com amor. Gratidão eterna."
+      ],
+      religiosas: [
+        "Que Deus abençoe sua vida hoje e sempre, mãe. Você é um presente divino.", 
+        "Mãe, você é a maior bênção que Deus colocou no meu caminho.",
+        "Peço a Deus que te proteja e te cubra de saúde e paz. Feliz Dia das Mães!",
+        "Sua fé me inspira, sua oração me guarda. Deus te abençoe, mãe."
+      ],
+      engracadas: [
+        "Mãe, eu te amo mais do que você ama dizer 'na volta a gente compra'.", 
+        "Feliz Dia das Mães para aquela que sempre acha o que eu perco em 2 segundos.",
+        "Mãe, parabéns por ter um filho(a) tão incrível como eu!",
+        "Eu não preciso de Google, minha mãe sabe de tudo!"
+      ],
+      status: [
+        "Mãe: meu primeiro amor, minha eterna rainha. 👑❤️", 
+        "A vida não vem com manual, vem com uma mãe. Feliz Dia das Mães! 🌸",
+        "Amor que não se mede, não se repete. Te amo, mãe! ✨",
+        "Minha base, meu tudo. Feliz Dia das Mães! 🥰"
+      ],
+      motivacionais: [
+        "Mãe, sua força é o que me ensina a nunca desistir. Você é o maior exemplo de resiliência que conheço.", 
+        "Sua luz brilha em cada passo que dou. Obrigado por ser essa mulher incrível e inspiradora.",
+        "Você é a prova de que o amor pode vencer qualquer obstáculo. Te admiro, mãe!",
+        "Sua coragem é meu combustível. Feliz Dia das Mães para a mulher mais forte que conheço."
+      ],
+      primeira_vez: [
+        "Feliz primeiro Dia das Mães! Que essa nova jornada seja repleta de descobertas e amor sem fim.",
+        "O brilho nos seus olhos agora tem um novo motivo. Parabéns pelo seu primeiro Dia das Mães!",
+        "Uma nova vida começou e com ela uma mãe maravilhosa nasceu. Feliz Dia das Mães!",
+        "O primeiro de muitos dias repletos de beijos e abraços. Você já é uma mãe incrível!"
+      ],
+      especiais: [
+        "Mãe, você é a poesia mais linda que Deus escreveu em minha vida. Seu amor é um oceano de bondade, onde encontro paz para enfrentar qualquer tempestade. Obrigado por ser minha rocha, meu porto seguro e minha maior inspiração. Feliz Dia das Mães!", 
+        "Neste dia tão especial, quero que saiba que cada batida do meu coração é um agradecimento por tudo o que você é. Sua dedicação, seu carinho e sua sabedoria moldaram quem eu sou hoje. Você é a rainha do meu lar e a heroína da minha história. Te amo além das palavras!",
+        "Mãe, sua existência é o maior milagre que já presenciei. Seu amor é a força invisível que me sustenta, a luz que dissipa minhas sombras e o calor que aquece minha alma. Obrigado por ser meu tudo.",
+        "Não há diamantes que brilhem mais que seu sorriso, nem seda mais suave que seu toque. Você é a personificação da perfeição e do amor divino na Terra. Feliz Dia das Mães!"
+      ]
     };
 
     const categoryFallbacks = fallbacks[category] || fallbacks.curtas;
@@ -232,7 +288,11 @@ export default function App() {
       incrementActions();
     } catch (error: any) {
       console.error('Erro na geração de caricatura:', error);
-      alert(`Erro ao gerar caricatura: ${error.message || 'Por favor, tente novamente.'}`);
+      if (error.message?.includes("Chave de API não configurada")) {
+        alert("⚠️ Chave de API não encontrada!\n\nPara que a caricatura funcione, você precisa configurar a chave GEMINI_API_KEY nos Segredos (Secrets) do AI Studio (ícone de engrenagem no canto superior direito).");
+      } else {
+        alert(`Erro ao gerar caricatura: ${error.message || 'Por favor, tente novamente.'}`);
+      }
     } finally {
       setIsGeneratingCaricature(false);
     }
