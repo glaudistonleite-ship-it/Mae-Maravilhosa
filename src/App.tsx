@@ -4,7 +4,7 @@ import { Heart, Send, Sparkles, Image as ImageIcon, Loader2, Download, RefreshCw
 import { generateMessage, generateCaricature } from './services/gemini';
 
 
-type Category = 'curtas' | 'emocionantes' | 'religiosas' | 'engracadas' | 'status' | 'motivacionais' | 'poeticas' | 'agradecimento' | 'primeira_vez' | 'especiais';
+type Category = 'curtas' | 'emocionantes' | 'religiosas' | 'engracadas' | 'status' | 'motivacionais' | 'poeticas' | 'agradecimento' | 'primeira_vez' | 'familia' | 'especiais';
 
 const CATEGORIES: { id: Category; label: string; icon: string; prompt: string }[] = [
   { id: 'curtas', label: 'Curtas', icon: '💖', prompt: 'Crie uma mensagem curtíssima de Dia das Mães (máximo 10 palavras).' },
@@ -16,6 +16,7 @@ const CATEGORIES: { id: Category; label: string; icon: string; prompt: string }[
   { id: 'status', label: 'Status', icon: '📱', prompt: 'Crie uma frase curta e impactante de Dia das Mães ideal para status de WhatsApp.' },
   { id: 'motivacionais', label: 'Inspiradoras', icon: '✨', prompt: 'Crie uma mensagem de Dia das Mães motivadora e inspiradora. Fale sobre a força da mulher, a resiliência de ser mãe e como ela é um exemplo de superação e luz para seus filhos.' },
   { id: 'primeira_vez', label: '1ª Viagem', icon: '👶', prompt: 'Crie uma mensagem especial para uma mãe de primeira viagem, celebrando seu primeiro Dia das Mães.' },
+  { id: 'familia', label: 'Família', icon: '🏠', prompt: 'Crie uma mensagem de Dia das Mães que fale sobre a importância dela para toda a família, união familiar e o lar.' },
   { id: 'especiais', label: 'Exclusivas 💌', icon: '💎', prompt: 'Crie uma mensagem de Dia das Mães EXTRAORDINÁRIA, LUXUOSA e EXTREMAMENTE TOCANTE. Deve ser uma obra-prima em forma de texto, longa, com metáforas lindas e um sentimento de gratidão infinita que leve às lágrimas.' },
 ];
 
@@ -220,6 +221,12 @@ export default function App() {
         "O brilho nos seus olhos agora tem um novo motivo. Parabéns pelo seu primeiro Dia das Mães!",
         "Uma nova vida começou e com ela uma mãe maravilhosa nasceu. Feliz Dia das Mães!",
         "O primeiro de muitos dias repletos de beijos e abraços. Você já é uma mãe incrível!"
+      ],
+      familia: [
+        "Mãe, você é o coração da nossa família. Obrigado por manter todos nós unidos com tanto amor.",
+        "Nossa casa é mais feliz porque você está nela. Feliz Dia das Mães de toda a sua família!",
+        "Você é o pilar que sustenta nossa família. Te amamos infinitamente!",
+        "Obrigado por ser o exemplo de amor e união que guia nossa família todos os dias."
       ],
       especiais: [
         "Mãe, você é a poesia mais linda que Deus escreveu em minha vida. Seu amor é um oceano de bondade, onde encontro paz para enfrentar qualquer tempestade. Obrigado por ser minha rocha, meu porto seguro e minha maior inspiração. Feliz Dia das Mães!", 
